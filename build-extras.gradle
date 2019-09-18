@@ -1,0 +1,18 @@
+apply plugin: 'com.aliyun.ams.emas-services'
+
+repositories{
+    flatDir {
+        dirs 'libs'
+    }
+    jcenter()
+}
+
+dependencies {
+    implementation (name: 'alicloud-android-push-3.1.5', ext: 'aar')
+    implementation (name: 'third-push-support-release', ext: 'jar')
+    implementation (name: 'alicloud-android-utils-1.1.5', ext: 'jar')
+    implementation (name: 'alicloud-android-ut-5.4.1', ext: 'jar')
+    implementation (name: 'alicloud-android-beacon-1.0.1', ext: 'jar')
+    implementation (name: 'huawei-push-2.6.3.305', ext: 'aar')
+    implementation (name: 'huawei-push-base-2.6.3.305', ext: 'aar')
+}
