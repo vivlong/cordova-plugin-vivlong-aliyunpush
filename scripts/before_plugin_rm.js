@@ -27,10 +27,8 @@ module.exports = function(context) {
           .replace(appClass, "")
           .replace('tools:replace="android:allowBackup"', "")
           .replace('android:allowBackup="false"', "")
-          .replace(
-            'android:networkSecurityConfig="@xml/network_security_config"',
-            ""
-          )
+          .replace('tools:overrideLibrary="com.huawei.android.hms.push"', "")
+          .replace('android:networkSecurityConfig="@xml/network_security_config"', "")
           .replace('xmlns:tools="http://schemas.android.com/tools"', "");
 
         fs.writeFile(manifestFile, result, "utf8", function(err) {

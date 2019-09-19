@@ -22,7 +22,7 @@ module.exports = function(context) {
         throw new Error("Unable to find AndroidManifest.xml: " + err);
       }
       var appClass =
-        '<application android:name="com.alipush.PushApplication" tools:replace="android:allowBackup" android:allowBackup="false" android:networkSecurityConfig="@xml/network_security_config"';
+        '<application android:name="com.alipush.PushApplication" tools:replace="android:allowBackup" android:allowBackup="false" tools:overrideLibrary="com.huawei.android.hms.push" android:networkSecurityConfig="@xml/network_security_config"';
       if (data.indexOf(appClass) == -1) {
         var result = data
           .replace(/<application/g, appClass)

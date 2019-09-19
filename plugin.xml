@@ -44,26 +44,9 @@
                 </intent-filter>
             </receiver>
 
-            <!-- 华为通道官方配置 -->
-            <receiver android:name="com.alibaba.sdk.android.push.HuaWeiReceiver" >
-                <intent-filter>
-                    <action android:name="com.huawei.android.push.intent.REGISTRATION" />
-                    <action android:name="com.huawei.android.push.intent.RECEIVE" />
-                    <action android:name="com.huawei.intent.action.PUSH" />
-                    <action android:name="com.huawei.intent.action.PUSH_STATE" />
-                </intent-filter>
-            </receiver>
-
-            <meta-data android:name="com.huawei.hms.client.appid" android:value="$HMSAPPID"/>
+            <meta-data android:name="com.huawei.hms.client.appid" android:value="appid=$HMSAPPID"/>
         </config-file>
 
-        <lib-file src="src/android/libs/alicloud-android-push-3.1.5.aar"/>
-        <lib-file src="src/android/libs/third-push-support-release.jar"/>
-        <lib-file src="src/android/libs/alicloud-android-utils-1.1.5.jar"/>
-        <lib-file src="src/android/libs/alicloud-android-ut-5.4.1.jar"/>
-        <lib-file src="src/android/libs/alicloud-android-beacon-1.0.1.jar"/>
-        <lib-file src="src/android/libs/huawei-push-2.6.3.305.aar"/>
-        <lib-file src="src/android/libs/huawei-push-base-2.6.3.305.aar"/>
         <source-file src="src/android/res/xml/network_security_config.xml" target-dir="res/xml" />
         <source-file src="src/android/PushUtils.java" target-dir="src/com/alipush" />
         <source-file src="src/android/AliyunPush.java" target-dir="src/com/alipush" />
