@@ -52,26 +52,8 @@ public class PushApplication extends Application {
 
         //getConfig(applicationContext);
 
-        PushServiceFactory.init(applicationContext);
-        final CloudPushService pushService = PushServiceFactory.getCloudPushService();
-        pushService.setLogLevel(CloudPushService.LOG_DEBUG);
-        pushService.register(applicationContext, new CommonCallback() {
-            @Override
-            public void onSuccess(String response) {
-                Log.i("==", "init cloudchannel success");
-                String deviceId = pushService.getDeviceId();
-                Log.i("== deviceId", deviceId + "");
-            }
-
-            @Override
-            public void onFailed(String errorCode, String errorMessage) {
-                Log.i("==", "init cloudchannel failed -- errorcode:" + errorCode + " -- errorMessage:" + errorMessage);
-
-            }
-        });
-
-        // 注册NotificationChannel
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+         // 注册NotificationChannel
+         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationManager mNotificationManager = (NotificationManager) applicationContext
                     .getSystemService(Context.NOTIFICATION_SERVICE);
             // 通知渠道的id
@@ -96,6 +78,24 @@ public class PushApplication extends Application {
             // 设置8.0系统的通知小图标,必须要纯色的图
             // PushServiceFactory.getCloudPushService().setNotificationSmallIcon(R.drawable.notify);
         }
+
+        PushServiceFactory.init(applicationContext);
+        final CloudPushService pushService = PushServiceFactory.getCloudPushService();
+        pushService.setLogLevel(CloudPushService.LOG_INFO);
+        pushService.register(applicationContext, new CommonCallback() {
+            @Override
+            public void onSuccess(String response) {
+                Log.i("==", "init cloudchannel success");
+                String deviceId = pushService.getDeviceId();
+                Log.i("== deviceId", deviceId + "");
+            }
+
+            @Override
+            public void onFailed(String errorCode, String errorMessage) {
+                Log.i("==", "init cloudchannel failed -- errorcode:" + errorCode + " -- errorMessage:" + errorMessage);
+
+            }
+        });
 
         // 华为通道
         HuaWeiRegister.register(this);

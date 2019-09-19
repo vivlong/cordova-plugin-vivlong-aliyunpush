@@ -1,8 +1,9 @@
-allprojects {
-    repositories {
-        maven {
-            url 'https://maven.aliyun.com/repository/releases'
-        }
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+    maven {
+        url 'https://maven.aliyun.com/repository/releases'
     }
 }
 
@@ -13,10 +14,9 @@ android {
 }
 
 dependencies {
-    implementation ('com.aliyun.ams:alicloud-android-push:3.1.5@aar') {
-        transitive true
-    }
-    implementation 'com.aliyun.ams:alicloud-android-third-push:3.0.8@aar'
-    implementation 'com.aliyun.ams:huawei-push:2.6.3.305'
-    implementation 'com.aliyun.ams:huawei-push-base:2.6.3.305'
+    api 'com.aliyun.ams:alicloud-android-push:3.1.5'
+    //api 'com.aliyun.ams:alicloud-android-third-push:3.0.8@aar'
+    api (name: 'alicloud-android-third-push-3.0.8', ext: 'aar')
+    api 'com.aliyun.ams:huawei-push:2.6.3.305'
+    api 'com.aliyun.ams:huawei-push-base:2.6.3.305'
 }
