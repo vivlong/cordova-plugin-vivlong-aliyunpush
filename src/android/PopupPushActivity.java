@@ -3,7 +3,6 @@ package com.alipush;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.util.Log;
 
 import com.alibaba.sdk.android.push.AndroidPopupActivity;
@@ -18,6 +17,7 @@ import java.util.Map;
  */
 public class PopupPushActivity extends AndroidPopupActivity {
     private static final String onSysNoticeOpened = "notificationOpened";
+    private static final String TAG = "Cordova Alipush PopupPushActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,16 +25,15 @@ public class PopupPushActivity extends AndroidPopupActivity {
     }
 
     /**
-     * 实现通知打开回调方法，获取通知相关信息
+     * 弹窗消息打开互调。辅助弹窗通知被点击时,此回调会被调用,用户可以从该回调中获取相关参数进行下一步处理
      *
      * @param title   标题
      * @param summary 内容
      * @param extMap  额外参数
      */
-    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     @Override
     protected void onSysNoticeOpened(String title, String summary, Map<String, String> extMap) {
-        Log.i("==", "辅助弹窗 onSysNoticeOpened, title: " + title + ", content: " + summary + ", extMap: " + extMap);
+        Log.i(TAG, "Receive ThirdPush notification, title: " + title + ", content: " + summary + ", extMap: " + extMap);
         Intent intent = new Intent(PopupPushActivity.this, com.alipush.AliyunPush.cls);
         startActivity(intent);
         savePushData(onSysNoticeOpened, title, summary, extMap);
@@ -42,7 +41,6 @@ public class PopupPushActivity extends AndroidPopupActivity {
     }
 
     // 将获取到的通知数据保存在sp中
-    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     private void savePushData(String type, String title, String content, Map<String, String> extraMap) {
         try {
             JSONObject data = null;

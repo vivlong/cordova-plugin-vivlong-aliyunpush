@@ -36,7 +36,7 @@ public class AliyunPush extends CordovaPlugin {
     public static Class<?> cls;
 
     /** LOG TAG */
-    private static final String LOG_TAG = "Cordova AliyunPush";
+    private static final String TAG = "Cordova AliyunPush";
 
     /** JS回调接口对象 */
     public static CallbackContext pushCallbackContext = null;
@@ -45,7 +45,7 @@ public class AliyunPush extends CordovaPlugin {
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-        Log.i(LOG_TAG, "AliyunPush#initialize");
+        Log.i(TAG, "AliyunPush#initialize");
         super.initialize(cordova, webView);
         //new PushUtils(cordova.getActivity()).isShowNoticeDialog(cordova.getActivity(), null);
     }
@@ -57,7 +57,7 @@ public class AliyunPush extends CordovaPlugin {
     @Override
     public boolean execute(final String action, final JSONArray args, final CallbackContext callbackContext)
             throws JSONException {
-        Log.i(LOG_TAG, "AliyunPush#execute");
+        Log.i(TAG, "AliyunPush#execute");
 
         boolean ret = false;
 
@@ -83,7 +83,7 @@ public class AliyunPush extends CordovaPlugin {
             final String account = args.getString(0);
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
-                    Log.i(LOG_TAG, "PushManager#bindAccount");
+                    Log.i(TAG, "PushManager#bindAccount");
                     pushService.bindAccount(account, new CommonCallback() {
                         @Override
                         public void onSuccess(String s) {
@@ -102,7 +102,7 @@ public class AliyunPush extends CordovaPlugin {
         } else if ("unbindAccount".equalsIgnoreCase(action)) {
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
-                    Log.i(LOG_TAG, "PushManager#unbindAccount");
+                    Log.i(TAG, "PushManager#unbindAccount");
                     pushService.unbindAccount(new CommonCallback() {
                         @Override
                         public void onSuccess(String s) {
@@ -123,7 +123,7 @@ public class AliyunPush extends CordovaPlugin {
 
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
-                    Log.i(LOG_TAG, "PushManager#bindTags");
+                    Log.i(TAG, "PushManager#bindTags");
 
                     if (tags != null && tags.length > 0) {
                         pushService.bindTag(pushService.DEVICE_TARGET, tags, null, new CommonCallback() {
@@ -147,7 +147,7 @@ public class AliyunPush extends CordovaPlugin {
             final String[] tags = getTagsFromArgs(args);
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
-                    Log.i(LOG_TAG, "PushManager#unbindTags");
+                    Log.i(TAG, "PushManager#unbindTags");
 
                     if (tags != null && tags.length > 0) {
 
@@ -159,7 +159,7 @@ public class AliyunPush extends CordovaPlugin {
 
                             @Override
                             public void onSuccess(String s) {
-                                Log.i(LOG_TAG, "onSuccess:" + s);
+                                Log.i(TAG, "onSuccess:" + s);
                                 callbackContext.success(s);
                             }
                         });
@@ -173,7 +173,7 @@ public class AliyunPush extends CordovaPlugin {
 
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
-                    Log.i(LOG_TAG, "PushManager#listTags");
+                    Log.i(TAG, "PushManager#listTags");
                     pushService.listTags(pushService.DEVICE_TARGET, new CommonCallback() {
                         @Override
                         public void onFailed(String s, String s1) {
@@ -182,7 +182,7 @@ public class AliyunPush extends CordovaPlugin {
 
                         @Override
                         public void onSuccess(String s) {
-                            Log.i(LOG_TAG, "onSuccess:" + s);
+                            Log.i(TAG, "onSuccess:" + s);
                             callbackContext.success(s);
                         }
                     });
@@ -212,7 +212,7 @@ public class AliyunPush extends CordovaPlugin {
                 try {
                     tags.add(args.getString(inx));
                 } catch (JSONException e) {
-                    LOG.e(LOG_TAG, e.getMessage(), e);
+                    LOG.e(TAG, e.getMessage(), e);
                 }
             }
         }
@@ -221,7 +221,7 @@ public class AliyunPush extends CordovaPlugin {
     }
 
     private void resError(CallbackContext callbackContext, String reason, String res) {
-        Log.i(LOG_TAG, "onFailed reason:" + reason + "res:" + res);
+        Log.i(TAG, "onFailed reason:" + reason + "res:" + res);
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("message", res);

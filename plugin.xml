@@ -30,10 +30,10 @@
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/manifest/application" mode="merge">
-            <activity android:name="com.alipush.PopupPushActivity" android:exported="true" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+            <activity android:name="com.alipush.PopupPushActivity" android:exported="true"/>
 
             <!-- 消息接收监听器，为保证receiver安全，建议设置不可导出，如需对其他应用开放可通过android：permission进行限制 -->
-            <receiver android:exported="false" android:name="com.alipush.PushMessageReceiver">
+            <receiver android:name="com.alipush.PushMessageReceiver" android:exported="false">
                 <intent-filter>
                     <action android:name="com.alibaba.push2.action.NOTIFICATION_OPENED" />
                 </intent-filter>
@@ -44,11 +44,21 @@
                     <action android:name="com.alibaba.sdk.android.push.RECEIVE" />
                 </intent-filter>
             </receiver>
+            <service android:name="com.alipush.PushMessageIntentService" android:exported="false">
+                <intent-filter>
+                    <action android:name="com.alibaba.push2.action.NOTIFICATION_OPENED" />
+                </intent-filter>
+                <intent-filter>
+                    <action android:name="com.alibaba.push2.action.NOTIFICATION_REMOVED" />
+                </intent-filter>
+                <intent-filter>
+                    <action android:name="com.alibaba.sdk.android.push.RECEIVE" />
+                </intent-filter>
+            </service>
 
             <meta-data android:name="com.huawei.hms.client.appid" android:value="appid=$HMSAPPID"/>
         </config-file>
 
-        <lib-file src="src/android/libs/alicloud-android-third-push-3.0.8.aar"/>
         <source-file src="src/android/res/xml/network_security_config.xml" target-dir="res/xml" />
         <source-file src="src/android/PushUtils.java" target-dir="src/com/alipush" />
         <source-file src="src/android/AliyunPush.java" target-dir="src/com/alipush" />

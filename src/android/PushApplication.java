@@ -3,35 +3,26 @@ package com.alipush;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.Context;
-import android.os.Build;
-import android.graphics.Color;
 import android.content.pm.PackageManager;
+import android.content.Context;
+import android.graphics.Color;
+import android.os.Build;
 import android.util.Log;
 
-// import static com.alipush.PushUtils.initPushService;
 import com.alibaba.sdk.android.push.CloudPushService;
 import com.alibaba.sdk.android.push.CommonCallback;
 import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory;
 import com.alibaba.sdk.android.push.huawei.HuaWeiRegister;
-//import com.alibaba.sdk.android.push.register.MiPushRegister;
-//import com.alibaba.sdk.android.push.register.OppoRegister;
-//import com.alibaba.sdk.android.push.register.MeizuRegister;
-//import com.alibaba.sdk.android.push.register.VivoRegister;
+import com.alibaba.sdk.android.push.register.GcmRegister;
+import com.alibaba.sdk.android.push.register.MeizuRegister;
+import com.alibaba.sdk.android.push.register.MiPushRegister;
+import com.alibaba.sdk.android.push.register.OppoRegister;
+import com.alibaba.sdk.android.push.register.VivoRegister;
 
 public class PushApplication extends Application {
 
     public static final String NotificationChannelId = "901209181657";
-
-    // // 小米
-    // private static String XiaoMiAppId = "";
-    // private static String XiaoMiAppKey = "";
-    // // OPPO
-    // private static String OPPOAppKey = "";
-    // private static String OPPOAppSecret = "";
-    // // 魅族
-    // private static String MeizuAppId = "";
-    // private static String MeizuAppKey = "";
+    private static final String TAG = "Cordova Alipush PushApplication";
 
     @Override
     public void onCreate() {
@@ -50,12 +41,9 @@ public class PushApplication extends Application {
      */
     private void initPushService(final Context applicationContext) throws PackageManager.NameNotFoundException {
 
-        //getConfig(applicationContext);
-
-         // 注册NotificationChannel
-         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationManager mNotificationManager = (NotificationManager) applicationContext
-                    .getSystemService(Context.NOTIFICATION_SERVICE);
+        // 创建NotificationChannel
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationManager mNotificationManager = (NotificationManager) applicationContext.getSystemService(Context.NOTIFICATION_SERVICE);
             // 通知渠道的id
             String id = NotificationChannelId;
             // 用户可以看到的通知渠道的名字.
@@ -85,15 +73,14 @@ public class PushApplication extends Application {
         pushService.register(applicationContext, new CommonCallback() {
             @Override
             public void onSuccess(String response) {
-                Log.i("==", "init cloudchannel success");
+                Log.i(TAG, "init cloudchannel success");
                 String deviceId = pushService.getDeviceId();
-                Log.i("== deviceId", deviceId + "");
+                Log.i(TAG, "deviceId-" + deviceId);
             }
 
             @Override
             public void onFailed(String errorCode, String errorMessage) {
-                Log.i("==", "init cloudchannel failed -- errorcode:" + errorCode + " -- errorMessage:" + errorMessage);
-
+                Log.i(TAG, "init cloudchannel failed -- errorcode:" + errorCode + " -- errorMessage:" + errorMessage);
             }
         });
 
