@@ -1,3 +1,4 @@
+
 var exec = require('cordova/exec');
 
 var AliyunPush = {
@@ -7,11 +8,8 @@ var AliyunPush = {
     },
 
     callNative: function (name, args, successCallback, errorCallback) {
-        if (errorCallback) {
-            cordova.exec(successCallback, errorCallback, 'AliyunPush', name, args)
-        } else {
-            cordova.exec(successCallback, this.errorCallback, 'AliyunPush', name, args)
-        }
+        errorCallback = errorCallback || this.errorCallback;
+        exec(successCallback, errorCallback, 'AliyunPush', name, args);
     },
 
     /**
@@ -20,9 +18,8 @@ var AliyunPush = {
      * @return {void}
      */
     onMessage: function (successCallback) {
-        this.callNative('onMessage', [], successCallback)
+        this.callNative('onMessage', [], successCallback);
     },
-
 
     /**
      * 没有权限时，请求开通通知权限，其他路过
@@ -45,7 +42,7 @@ var AliyunPush = {
 
     /**
      * 阿里云推送绑定账号名
-     * @param  {string} account         账号
+     * @param  {string} account           账号
      * @param  {Function} successCallback 成功回调
      * @param  {Function} errorCallback   失败回调
      * @return {void}
@@ -72,7 +69,7 @@ var AliyunPush = {
      * @return {void}
      */
     bindTags: function (tags, successCallback, errorCallback) {
-        this.callNative('bindTags', [tags], successCallback, errorCallback)
+        this.callNative('bindTags', [tags], successCallback, errorCallback);
     },
 
     /**
@@ -83,7 +80,7 @@ var AliyunPush = {
      * @return {void}
      */
     unbindTags: function (tags, successCallback, errorCallback) {
-        this.callNative('unbindTags', [tags], successCallback, errorCallback)
+        this.callNative('unbindTags', [tags], successCallback, errorCallback);
     },
 
     /**
@@ -93,7 +90,7 @@ var AliyunPush = {
      * @return {void}
      */
     listTags: function (successCallback, errorCallback) {
-        this.callNative('listTags', [], successCallback, errorCallback)
+        this.callNative('listTags', [], successCallback, errorCallback);
     },
 
     AliyunPush: AliyunPush

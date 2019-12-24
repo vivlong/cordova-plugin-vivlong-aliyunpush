@@ -79,7 +79,7 @@ public class PushApplication extends Application {
             public void onSuccess(String response) {
                 Log.i(TAG, "init cloudchannel success");
                 String deviceId = pushService.getDeviceId();
-                Log.i(TAG, "deviceId-" + deviceId);
+                Log.i(TAG, "deviceId " + deviceId);
             }
 
             @Override
