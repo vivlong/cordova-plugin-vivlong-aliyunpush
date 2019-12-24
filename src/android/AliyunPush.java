@@ -244,7 +244,7 @@ public class AliyunPush extends CordovaPlugin {
      * @param data JSON对象
      */
     public static void pushData(final JSONObject data) {
-        Log.i("== pushData", data.toString());
+        Log.i(TAG, "pushData " + data.toString());
         if (pushCallbackContext == null) {
             return;
         }
