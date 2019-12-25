@@ -14,7 +14,7 @@
     </engines>
 
     <js-module src="www/aliyunpush.js" name="AliyunPush">
-        <clobbers target="aliyunPush" />
+        <clobbers target="AliyunPush" />
     </js-module>
 
     <platform name="android">
