@@ -13,8 +13,8 @@
         <engine name="cordova-android" version=">=5.0.0" />
     </engines>
 
-    <js-module src="www/aliyunpush.js" name="AliyunPush">
-        <clobbers target="AliyunPush" />
+    <js-module src="www/aliyunPush.js" name="aliyunPush">
+        <clobbers target="aliyunPush" />
     </js-module>
 
     <platform name="android">

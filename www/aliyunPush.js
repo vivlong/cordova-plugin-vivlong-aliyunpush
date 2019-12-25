@@ -2,8 +2,7 @@ var exec = require("cordova/exec");
 
 var PLUGIN_NAME = "AliyunPush";
 
-var AliyunPush = {
-  registered: false,
+var aliyunPush = {
   errorCallback: function(msg) {
     console.log("AliyunPush Callback Error: " + msg);
   },
@@ -108,7 +107,6 @@ var AliyunPush = {
     this.callNative("listTags", [], successCallback, errorCallback);
   },
 
-  AliyunPush: AliyunPush
 };
 
-module.exports = AliyunPush;
+module.exports = aliyunPush;
