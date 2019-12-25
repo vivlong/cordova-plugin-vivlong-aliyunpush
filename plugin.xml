@@ -14,7 +14,7 @@
     </engines>
 
     <js-module src="www/aliyunpush.js" name="AliyunPush">
-        <clobbers target="AliyunPush" />
+        <clobbers target="cordova.plugins.aliyunPush" />
     </js-module>
 
     <platform name="android">
