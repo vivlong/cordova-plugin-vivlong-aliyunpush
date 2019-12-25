@@ -1,17 +1,10 @@
 {
-  "name": "cordova-plugin-aliyunpush",
+  "name": "@vivlong/cordova-plugin-aliyunpush",
   "version": "1.1.0",
   "description": "Cordova Push Plugin,use Aliyun SDK",
-  "cordova": {
-    "id": "cordova-plugin-aliyunpush",
-    "platforms": [
-      "android",
-      "ios"
-    ]
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/442623641/cordova-plugin-aliyunpush.git"
+    "url": "git+https://github.com/vivlong/cordova-plugin-aliyunpush.git"
   },
   "keywords": [
     "cordova",
@@ -20,16 +13,10 @@
     "ecosystem:cordova",
     "cordova-android"
   ],
-  "engines": [
-    {
-      "name": "cordova-android",
-      "version": ">=5.0.0"
-    }
-  ],
   "author": "vivlong",
   "license": "Apache 2.0",
   "bugs": {
-    "url": "https://github.com/442623641/cordova-plugin-aliyunpush/issues"
+    "url": "https://github.com/vivlong/cordova-plugin-aliyunpush/issues"
   },
-  "homepage": "https://github.com/442623641/cordova-plugin-aliyunpush#readme"
+  "homepage": "https://github.com/vivlong/cordova-plugin-aliyunpush#readme"
 }
