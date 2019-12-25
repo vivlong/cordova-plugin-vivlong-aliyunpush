@@ -1,4 +1,4 @@
-# cordova-plugin-aliyunpush
+# cordova-plugin-vivlong-aliyunpush
 
 ## Install
 
@@ -15,15 +15,7 @@ initPushService(this)
 
 - 通过 Cordova Plugins 安装，要求 Cordova CLI 5.0+：
 
-  ```shell
-  cordova plugin add https://github.com/442623641/cordova-plugin-aliyunpush.git
-  ionic cordova build android --prod
-  ```
-
-- 或下载到本地安装：
-  ```shell
-  cordova plugin add Your_Plugin_Path 
-  ```
+```
 修改项目级目录下build.gradle（{project}/build.gradle）：
 添加maven（低版本gradle，可能会有问题）
 ```

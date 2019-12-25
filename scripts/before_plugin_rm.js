@@ -7,7 +7,7 @@ module.exports = function(context) {
   // The plugins array will be empty during platform add
   if (
     plugins.length > 0 &&
-    plugins.indexOf("cordova-plugin-aliyunpush") === -1
+    plugins.indexOf("cordova-plugin-vivlong-aliyunpush") === -1
   ) {
     return;
   }
