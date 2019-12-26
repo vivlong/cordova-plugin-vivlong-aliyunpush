@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-vivlong-aliyunpush" version="1.0.0"
+<plugin xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-vivlong-aliyunpush" version="1.1.4"
     xmlns="http://apache.org/cordova/ns/plugins/1.0">
 
-    <name>Aliyun push</name>
+    <name>Aliyun Push</name>
     <description>Cordova Push Plugin,use Aliyun SDK</description>
     <license>Apache 2.0</license>
     <keywords>cordova,aliyun,push,aliyunpush,xiaomi,huawei,oppo</keywords>
@@ -13,8 +13,8 @@
         <engine name="cordova-android" version=">=5.0.0" />
     </engines>
 
-    <js-module src="www/aliyunPush.js" name="aliyunPush">
-        <clobbers target="aliyunPush" />
+    <js-module src="www/AliyunPush.js" name="AliyunPush">
+        <clobbers target="AliyunPush" />
     </js-module>
 
     <platform name="android">
