@@ -195,7 +195,7 @@ public class AliyunPush extends CordovaPlugin {
                 public void run() {
                     Log.i(TAG, "PushManager # addAlias");
 
-                    if (alias != null && alias.length > 0) {
+                    if (alias != null && alias.length() > 0) {
                         pushService.addAlias(alias, new CommonCallback() {
                             @Override
                             public void onSuccess(String s) {
