@@ -64,6 +64,7 @@ public class PushApplication extends Application {
             // 设置通知出现时的震动（如果 android 设备支持的话）
             mChannel.enableVibration(true);
             mChannel.setVibrationPattern(new long[] { 100, 200, 300, 400, 500, 400, 300, 200, 400 });
+            //mChannel.setSound(Uri.parse("android.resource://" + getPackageName() + "/raw/qqqq"), Notification.AUDIO_ATTRIBUTES_DEFAULT);
             // 最后在notificationmanager中创建该通知渠道
             mNotificationManager.createNotificationChannel(mChannel);
 

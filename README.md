@@ -64,24 +64,24 @@ Preferences available for both iOS and Android
 > - OPPOAppSecret可不配置，OPPO通道AppSecret，如已注册，需在阿里云后台推送配置中配置
 ```xml
 <config-file parent="/manifest/application" target="AndroidManifest.xml" xmlns:android="http://schemas.android.com/apk/res/android">
-    <meta-data android:name="AliyunAppKey" android:value="25532868" />
-    <meta-data android:name="AliyunAppSecret" android:value="28688f0fba136fcbb8a90c0a78b2cc83" />
-    <meta-data android:name="XiaoMiAppId" android:value="2868303761518018487" />
-    <meta-data android:name="XiaoMiAppKey" android:value="2868801843487" />
-    <meta-data android:name="OPPOAppKey" android:value="286856813b8745928c2102c20dd49fde" />
-    <meta-data android:name="OPPOAppSecret" android:value="2868c44b4eee471097243658679910d1" />
+    <meta-data android:name="AliyunAppKey" android:value="XXXXXXXXXX" />
+    <meta-data android:name="AliyunAppSecret" android:value="XXXXXXXXXX" />
+    <meta-data android:name="XiaoMiAppId" android:value="XXXXXXXXXX" />
+    <meta-data android:name="XiaoMiAppKey" android:value="XXXXXXXXXX" />
+    <meta-data android:name="OPPOAppKey" android:value="XXXXXXXXXX" />
+    <meta-data android:name="OPPOAppSecret" android:value="XXXXXXXXXX" />
 </config-file>
 ```
 ### IOS Preferences
 ```xml
   <edit-config file="*AliyunEmasServices-Info.plist" mode="merge" target="emas.appKey">
-    <string>44342758</string>
+    <string>XXXXXXXXXX</string>
   </edit-config>
   <edit-config file="*AliyunEmasServices-Info.plist" mode="merge" target="emas.appSecret">
-    <string>7edda2aee310aef6803c46555d8de198</string>
+    <string>XXXXXXXXXX</string>
   </edit-config>
   <edit-config file="*AliyunEmasServices-Info.plist" mode="merge" target="emas.bundleId">
-    <string>com.ionic.app</string>
+    <string>XXXXXXXXXX</string>
   </edit-config>
 ```
 
@@ -97,7 +97,7 @@ Preferences available for both iOS and Android
      * @param  {Function} errorCallback   失败回调
      * @return {void}  
      */
-    getRegisterId: function(successCallback, errorCallback)
+    getDeviceId: function(successCallback, errorCallback)
 
     /**
      * 阿里云推送绑定账号名

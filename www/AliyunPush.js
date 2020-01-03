@@ -50,13 +50,13 @@ var AliyunPush = {
    * @param  {Function} errorCallback   失败回调
    * @return {void}
    */
-  getRegisterId: function(successCallback, errorCallback) {
-    this.callNative("getRegisterId", [], successCallback, errorCallback);
+  getDeviceId: function(successCallback, errorCallback) {
+    this.callNative("getDeviceId", [], successCallback, errorCallback);
   },
 
   /**
-   * 阿里云推送绑定账号名
-   * @param  {string} account         账号
+   * 阿里云推送绑定账号,将应用内账号和推送通道相关联，可以实现按账号的定点消息推送
+   * @param  {string} account           账号
    * @param  {Function} successCallback 成功回调
    * @param  {Function} errorCallback   失败回调
    * @return {void}
@@ -66,7 +66,7 @@ var AliyunPush = {
   },
 
   /**
-   * 阿里云推送解除账号名,退出切换账号时调用
+   * 阿里云推送解绑账号,将应用内账号和推送通道取消关联
    * @param  {Function} successCallback 成功回调
    * @param  {Function} errorCallback   失败回调
    * @return {void}
@@ -76,7 +76,7 @@ var AliyunPush = {
   },
 
   /**
-   * 阿里云推送绑定标签
+   * 阿里云推送绑定标签到指定目标
    * @param  {string[]} tags            标签列表
    * @param  {Function} successCallback 成功回调
    * @param  {Function} errorCallback   失败回调
@@ -87,7 +87,7 @@ var AliyunPush = {
   },
 
   /**
-   * 阿里云推送解除绑定标签
+   * 阿里云推送解绑指定目标标签
    * @param  {string[]} tags            标签列表
    * @param  {Function} successCallback 成功回调
    * @param  {Function} errorCallback   失败回调
@@ -98,13 +98,49 @@ var AliyunPush = {
   },
 
   /**
-   * 阿里云推送解除绑定标签
+   * 阿里云推送查询目标绑定标签
    * @param  {Function} successCallback 成功回调
    * @param  {Function} errorCallback   失败回调
    * @return {void}
    */
   listTags: function(successCallback, errorCallback) {
     this.callNative("listTags", [], successCallback, errorCallback);
+  },
+
+  /**
+   * 阿里云推送添加别名
+   * @param  {string} alias             别名
+   * @param  {Function} successCallback 成功回调
+   * @param  {Function} errorCallback   失败回调
+   * @return {void}
+   */
+  addAlias: function(alias, successCallback, errorCallback) {
+    this.callNative("addAlias", [alias], successCallback, errorCallback);
+  },
+
+  /**
+   * 阿里云推送删除设备别名
+   * @param  {string} alias             别名
+   * @param  {Function} successCallback 成功回调
+   * @param  {Function} errorCallback   失败回调
+   * @return {void}
+   */
+  removeAlias: function(alias, successCallback, errorCallback) {
+    this.callNative("removeAlias", [alias], successCallback, errorCallback);
+  },
+
+  /**
+   * 阿里云推送查询设备别名
+   * @param  {Function} successCallback 成功回调
+   * @param  {Function} errorCallback   失败回调
+   * @return {void}
+   */
+  listAliases: function(successCallback, errorCallback) {
+    this.callNative("listAliases", [], successCallback, errorCallback);
+  },
+
+  checkPushChannelStatus: function(successCallback) {
+    this.callNative("checkPushChannelStatus", [], successCallback);
   },
 
 };
