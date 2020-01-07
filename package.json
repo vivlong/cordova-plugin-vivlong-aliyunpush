@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-vivlong-aliyunpush",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "Cordova Push Plugin,use Aliyun SDK",
   "repository": {
     "type": "git",

@@ -23,8 +23,8 @@ import com.alibaba.sdk.android.push.register.VivoRegister;
 import com.alibaba.sdk.android.man.MANService;
 import com.alibaba.sdk.android.man.MANServiceProvider;
 
-import com.growingio.android.sdk.collection.Configuration;
-import com.growingio.android.sdk.collection.GrowingIO;
+// import com.growingio.android.sdk.collection.Configuration;
+// import com.growingio.android.sdk.collection.GrowingIO;
 
 public class PushApplication extends Application {
 
@@ -37,7 +37,7 @@ public class PushApplication extends Application {
             initGrowingIO(this);
             initPushService(this);
             initManService(this);
-            initGrowingIO(this);
+            // initGrowingIO(this);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -152,7 +152,7 @@ public class PushApplication extends Application {
      *
      * @param applicationContext
      */
-    private void initGrowingIO(final Context applicationContext) throws PackageManager.NameNotFoundException {
-        GrowingIO.startWithConfiguration(this, new Configuration());
-    }
+    // private void initGrowingIO(final Context applicationContext) throws PackageManager.NameNotFoundException {
+    //     GrowingIO.startWithConfiguration(this, new Configuration());
+    // }
 }
