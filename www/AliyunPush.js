@@ -143,6 +143,10 @@ var AliyunPush = {
     this.callNative("checkPushChannelStatus", [], successCallback);
   },
 
+  areNotificationsEnabled: function(successCallback) {
+    this.callNative("areNotificationsEnabled", [], successCallback);
+  },
+
 };
 
 module.exports = AliyunPush;

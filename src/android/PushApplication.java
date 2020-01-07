@@ -3,6 +3,7 @@ package com.alipush;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.Context;
 import android.graphics.Color;
@@ -22,17 +23,21 @@ import com.alibaba.sdk.android.push.register.VivoRegister;
 import com.alibaba.sdk.android.man.MANService;
 import com.alibaba.sdk.android.man.MANServiceProvider;
 
+import com.growingio.android.sdk.collection.Configuration;
+import com.growingio.android.sdk.collection.GrowingIO;
+
 public class PushApplication extends Application {
 
-    public static final String NotificationChannelId = "901209181657";
     private static final String TAG = "Cordova Alipush PushApplication";
 
     @Override
     public void onCreate() {
         super.onCreate();
         try {
+            initGrowingIO(this);
             initPushService(this);
             initManService(this);
+            initGrowingIO(this);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -44,10 +49,20 @@ public class PushApplication extends Application {
      * @param applicationContext
      */
     private void initPushService(final Context applicationContext) throws PackageManager.NameNotFoundException {
+        ApplicationInfo appInfo = applicationContext.getPackageManager()
+                .getApplicationInfo(applicationContext.getPackageName(), PackageManager.GET_META_DATA);
+        final String OPPOAppKey = appInfo.metaData.get("OPPO_APPKEY").toString();
+        final String OPPOAppSecret = appInfo.metaData.get("OPPO_SECRET").toString();
+        // XiaoMiAppId = appInfo.metaData.get("XiaoMiAppId").toString();
+        // XiaoMiAppKey = appInfo.metaData.get("XiaoMiAppKey").toString();
+        // MeizuAppId = appInfo.metaData.get("MeizuAppId").toString();
+        // MeizuAppKey = appInfo.metaData.get("MeizuAppKey").toString();
+        final String NotificationChannelId = appInfo.metaData.get("NotificationChannelId").toString();
 
         // 创建NotificationChannel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationManager mNotificationManager = (NotificationManager) applicationContext.getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationManager mNotificationManager = (NotificationManager) applicationContext
+                    .getSystemService(Context.NOTIFICATION_SERVICE);
             // 通知渠道的id
             String id = NotificationChannelId;
             // 用户可以看到的通知渠道的名字.
@@ -64,7 +79,8 @@ public class PushApplication extends Application {
             // 设置通知出现时的震动（如果 android 设备支持的话）
             mChannel.enableVibration(true);
             mChannel.setVibrationPattern(new long[] { 100, 200, 300, 400, 500, 400, 300, 200, 400 });
-            //mChannel.setSound(Uri.parse("android.resource://" + getPackageName() + "/raw/qqqq"), Notification.AUDIO_ATTRIBUTES_DEFAULT);
+            // mChannel.setSound(Uri.parse("android.resource://" + getPackageName() +
+            // "/raw/qqqq"), Notification.AUDIO_ATTRIBUTES_DEFAULT);
             // 最后在notificationmanager中创建该通知渠道
             mNotificationManager.createNotificationChannel(mChannel);
 
@@ -91,20 +107,22 @@ public class PushApplication extends Application {
 
         // 华为通道
         HuaWeiRegister.register(this);
+        // OPPO通道
+        if (OPPOAppKey != null && OPPOAppKey.length() > 1 && OPPOAppSecret != null && OPPOAppSecret.length() > 1) {
+            Log.i("OPPO Push registered", "OPPOAppKey:" + OPPOAppKey + " , OPPOAppSecret:" + OPPOAppSecret);
+            OppoRegister.register(applicationContext, OPPOAppKey, OPPOAppSecret);
+        }
         // // 小米通道
         // if (XiaoMiAppId != null && XiaoMiAppKey != null) {
-        //     Log.i("XiaoMi Push registered", "XiaoMiAppId:" + XiaoMiAppId + " , XiaoMiAppKey:" + XiaoMiAppKey);
-        //     MiPushRegister.register(applicationContext, XiaoMiAppId, XiaoMiAppKey);
-        // }
-        // // OPPO通道
-        // if (OPPOAppKey != null && OPPOAppSecret != null) {
-        //     Log.i("OPPO Push registered", "OPPOAppKey:" + OPPOAppKey + " , OPPOAppSecret:" + OPPOAppSecret);
-        //     OppoRegister.register(applicationContext, OPPOAppKey, OPPOAppSecret);
+        // Log.i("XiaoMi Push registered", "XiaoMiAppId:" + XiaoMiAppId + " ,
+        // XiaoMiAppKey:" + XiaoMiAppKey);
+        // MiPushRegister.register(applicationContext, XiaoMiAppId, XiaoMiAppKey);
         // }
         // // 魅族通道
         // if (MeizuAppId != null && MeizuAppkey != null) {
-        //     Log.i("OPPO Push registered", "MeizuAppId:" + MeizuAppId + " , MeizuAppkey:" + MeizuAppkey);
-        //     MeizuRegister.register(applicationContext, MeizuAppId, MeizuAppkey);
+        // Log.i("OPPO Push registered", "MeizuAppId:" + MeizuAppId + " , MeizuAppkey:"
+        // + MeizuAppkey);
+        // MeizuRegister.register(applicationContext, MeizuAppId, MeizuAppkey);
         // }
         // // VIVO通道
         // VivoRegister.register(applicationContext);
@@ -124,7 +142,17 @@ public class PushApplication extends Application {
         // manService.getMANAnalytics().turnOffCrashReporter();
         // 设置渠道（用以标记该app的分发渠道名称），如果不关心可以不设置即不调用该接口，渠道设置将影响控制台【渠道分析】栏目的报表展现。如果文档3.3章节更能满足您渠道配置的需求，就不要调用此方法，按照3.3进行配置即可；1.1.6版本及之后的版本，请在init方法之前调用此方法设置channel.
         // manService.getMANAnalytics().setChannel("某渠道");
-        // MAN初始化方法之一，从AndroidManifest.xml中获取appKey和appSecret初始化，若您采用上述 2.3中"统一接入的方式"，则使用当前init方法即可。
+        // MAN初始化方法之一，从AndroidManifest.xml中获取appKey和appSecret初始化，若您采用上述
+        // 2.3中"统一接入的方式"，则使用当前init方法即可。
         manService.getMANAnalytics().init(this, getApplicationContext());
+    }
+
+    /**
+     * 初始化GrowingIO
+     *
+     * @param applicationContext
+     */
+    private void initGrowingIO(final Context applicationContext) throws PackageManager.NameNotFoundException {
+        GrowingIO.startWithConfiguration(this, new Configuration());
     }
 }

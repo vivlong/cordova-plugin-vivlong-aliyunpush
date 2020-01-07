@@ -285,6 +285,38 @@ public class AliyunPush extends CordovaPlugin {
                 }
             });
             ret = true;
+        } else if ("areNotificationsEnabled".equalsIgnoreCase(action)) {
+            cordova.getThreadPool().execute(new Runnable() {
+                public void run() {
+                    Log.i(TAG, "PushManager # clearNotifications");
+                    boolean s = new PushUtils(cordova.getActivity()).areNotificationsEnabled(cordova.getActivity());
+                    callbackContext.success(s ? 1 : 0);
+
+                }
+            });
+            sendNoResultPluginResult(callbackContext);
+            ret = true;
+        } else if ("manUserRegister".equalsIgnoreCase(action)) {
+            final String usernick = args.getString(0);
+            cordova.getThreadPool().execute(new Runnable() {
+                public void run() {
+                    Log.i(TAG, "MANAnalytics # userRegister");
+                    new PushUtils(cordova.getActivity()).userRegister(usernick);
+
+                }
+            });
+            ret = true;
+        } else if ("manUpdateUserAccount".equalsIgnoreCase(action)) {
+            final String usernick = args.getString(0);
+            final String userid = args.getString(1);
+            cordova.getThreadPool().execute(new Runnable() {
+                public void run() {
+                    Log.i(TAG, "MANAnalytics # updateUserAccount");
+                    new PushUtils(cordova.getActivity()).updateUserAccount(usernick, userid);
+
+                }
+            });
+            ret = true;
         }
 
         return ret;

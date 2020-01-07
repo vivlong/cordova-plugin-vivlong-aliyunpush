@@ -43,12 +43,12 @@ module.exports = function(context) {
   } else {
     console.error("AndroidManifest.xml is not existsSync.");
   }
-  var emasFile = path.join(platformRoot, "app/aliyun-emas-services.json");
-  if (fs.existsSync(emasFile)) {
-    fs.unlink(emasFile, function(err) {
-      if (err)
-        throw new Error("Remove aliyun-emas-services.json Failed.: " + err);
-      console.log("Remove aliyun-emas-services.json success.");
-    });
-  }
+  // var emasFile = path.join(platformRoot, "app/aliyun-emas-services.json");
+  // if (fs.existsSync(emasFile)) {
+  //   fs.unlink(emasFile, function(err) {
+  //     if (err)
+  //       throw new Error("Remove aliyun-emas-services.json Failed.: " + err);
+  //     console.log("Remove aliyun-emas-services.json success.");
+  //   });
+  // }
 };
