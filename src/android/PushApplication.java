@@ -34,10 +34,9 @@ public class PushApplication extends Application {
     public void onCreate() {
         super.onCreate();
         try {
-            initGrowingIO(this);
+            // initGrowingIO(this);
             initPushService(this);
             initManService(this);
-            // initGrowingIO(this);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
