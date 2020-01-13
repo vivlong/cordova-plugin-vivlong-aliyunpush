@@ -52,10 +52,12 @@ public class PushApplication extends Application {
                 .getApplicationInfo(applicationContext.getPackageName(), PackageManager.GET_META_DATA);
         final String OPPOAppKey = appInfo.metaData.get("OPPO_APPKEY").toString();
         final String OPPOAppSecret = appInfo.metaData.get("OPPO_SECRET").toString();
-        // XiaoMiAppId = appInfo.metaData.get("XiaoMiAppId").toString();
-        // XiaoMiAppKey = appInfo.metaData.get("XiaoMiAppKey").toString();
-        // MeizuAppId = appInfo.metaData.get("MeizuAppId").toString();
-        // MeizuAppKey = appInfo.metaData.get("MeizuAppKey").toString();
+        final String XiaoMiAppId = appInfo.metaData.get("XiaoMiAppId").toString();
+        final String XiaoMiAppKey = appInfo.metaData.get("XiaoMiAppKey").toString();
+        final String MeizuAppId = appInfo.metaData.get("MeizuAppId").toString();
+        final String MeizuAppKey = appInfo.metaData.get("MeizuAppKey").toString();
+        final String VIVOAppId = appInfo.metaData.get("com.vivo.push.app_id").toString();
+        final String VIVOAppKey = appInfo.metaData.get("com.vivo.push.api_key").toString();
         final String NotificationChannelId = appInfo.metaData.get("NotificationChannelId").toString();
 
         // 创建NotificationChannel
@@ -78,8 +80,7 @@ public class PushApplication extends Application {
             // 设置通知出现时的震动（如果 android 设备支持的话）
             mChannel.enableVibration(true);
             mChannel.setVibrationPattern(new long[] { 100, 200, 300, 400, 500, 400, 300, 200, 400 });
-            // mChannel.setSound(Uri.parse("android.resource://" + getPackageName() +
-            // "/raw/qqqq"), Notification.AUDIO_ATTRIBUTES_DEFAULT);
+            // mChannel.setSound(Uri.parse("android.resource://" + getPackageName() + "/raw/qqqq"), Notification.AUDIO_ATTRIBUTES_DEFAULT);
             // 最后在notificationmanager中创建该通知渠道
             mNotificationManager.createNotificationChannel(mChannel);
 
@@ -108,23 +109,24 @@ public class PushApplication extends Application {
         HuaWeiRegister.register(this);
         // OPPO通道
         if (OPPOAppKey != null && OPPOAppKey.length() > 1 && OPPOAppSecret != null && OPPOAppSecret.length() > 1) {
-            Log.i("OPPO Push registered", "OPPOAppKey:" + OPPOAppKey + " , OPPOAppSecret:" + OPPOAppSecret);
+            Log.i(TAG, "OPPO Push registered - OPPOAppKey:" + OPPOAppKey + " , OPPOAppSecret:" + OPPOAppSecret);
             OppoRegister.register(applicationContext, OPPOAppKey, OPPOAppSecret);
         }
-        // // 小米通道
-        // if (XiaoMiAppId != null && XiaoMiAppKey != null) {
-        // Log.i("XiaoMi Push registered", "XiaoMiAppId:" + XiaoMiAppId + " ,
-        // XiaoMiAppKey:" + XiaoMiAppKey);
-        // MiPushRegister.register(applicationContext, XiaoMiAppId, XiaoMiAppKey);
-        // }
-        // // 魅族通道
-        // if (MeizuAppId != null && MeizuAppkey != null) {
-        // Log.i("OPPO Push registered", "MeizuAppId:" + MeizuAppId + " , MeizuAppkey:"
-        // + MeizuAppkey);
-        // MeizuRegister.register(applicationContext, MeizuAppId, MeizuAppkey);
-        // }
-        // // VIVO通道
-        // VivoRegister.register(applicationContext);
+        // 小米通道
+        if (XiaoMiAppId != null && XiaoMiAppId.length() > 1 && XiaoMiAppKey != null && XiaoMiAppKey.length() > 1) {
+            Log.i(TAG, "XiaoMi Push registered - XiaoMiAppId:" + XiaoMiAppId + " ,XiaoMiAppKey:" + XiaoMiAppKey);
+            MiPushRegister.register(applicationContext, XiaoMiAppId, XiaoMiAppKey);
+        }
+        // 魅族通道
+        if (MeizuAppId != null && MeizuAppId.length() > 1 && MeizuAppkey != null && MeizuAppkey.length() > 1) {
+            Log.i(TAG, "OPPO Push registered - MeizuAppId:" + MeizuAppId + " , MeizuAppkey:" + MeizuAppkey);
+            MeizuRegister.register(applicationContext, MeizuAppId, MeizuAppkey);
+        }
+        // VIVO通道
+        if (VIVOAppId != null && VIVOAppId.length() > 1 && VIVOAppkey != null && VIVOAppkey.length() > 1) {
+            Log.i(TAG, "VIVO Push registered - VIVOAppId:" + VIVOAppId + " , VIVOAppkey:" + VIVOAppkey);
+            VivoRegister.register(applicationContext);
+        }
     }
 
     /**

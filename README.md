@@ -1,4 +1,4 @@
-# cordova-plugin-vivlong-aliyunpush
+# cordova-plugin-vivlong-aliyunpush ![npm](https://img.shields.io/npm/dt/cordova-plugin-vivlong-aliyunpush)
 
 ## Install
 
@@ -54,8 +54,6 @@ Preferences available for both iOS and Android
 - 对应Android系统推送，如果需要支持华为、小米、Google FCM（原GCM）系统通道，请在此页面配置对应的参数信息。可以根据需要配置一种或多种厂商辅助通道。
 - [阿里云推送官方文档](https://help.aliyun.com/document_detail/92837.html?spm=a2c4g.11174283.6.637.52eb6d16cxZ6zi)
 
-<img src="http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/pic/92837/cn_zh/1538961570959/%E5%BA%94%E7%94%A8%E9%85%8D%E7%BD%AE.png" width ="70%" height="70%" div align="center" />
-
 > - AliyunAppKey:阿里云appKey
 > - AliyunAppSecret:阿里云appSecret
 > - XiaoMiAppId:可不配置，小米通道AppId，如已注册，需在阿里云后台推送配置中配置
@@ -71,18 +69,6 @@ Preferences available for both iOS and Android
     <meta-data android:name="OPPOAppKey" android:value="XXXXXXXXXX" />
     <meta-data android:name="OPPOAppSecret" android:value="XXXXXXXXXX" />
 </config-file>
-```
-### IOS Preferences
-```xml
-  <edit-config file="*AliyunEmasServices-Info.plist" mode="merge" target="emas.appKey">
-    <string>XXXXXXXXXX</string>
-  </edit-config>
-  <edit-config file="*AliyunEmasServices-Info.plist" mode="merge" target="emas.appSecret">
-    <string>XXXXXXXXXX</string>
-  </edit-config>
-  <edit-config file="*AliyunEmasServices-Info.plist" mode="merge" target="emas.bundleId">
-    <string>XXXXXXXXXX</string>
-  </edit-config>
 ```
 
 
