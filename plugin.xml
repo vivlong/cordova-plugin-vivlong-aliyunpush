@@ -1,18 +1,22 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-vivlong-aliyunpush" version="1.1.11"
+<plugin xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-vivlong-aliyunpush" version="1.1.13"
     xmlns="http://apache.org/cordova/ns/plugins/1.0">
 
     <name>Aliyun Push</name>
     <description>Cordova Push Plugin,use Aliyun SDK</description>
     <license>Apache 2.0</license>
-    <keywords>cordova,aliyun,push,aliyunpush,xiaomi,huawei,oppo,vivo</keywords>
+    <keywords>cordova,aliyun,push,aliyunpush,huawei,xiaomi,oppo,vivo,meizu</keywords>
 
     <preference name="CHANNELID" default="901209181657"/>
     <preference name="HMSAPPID" default=" "/>
+    <preference name="XIAOMIAPPID" default=" "/>
+    <preference name="XIAOMIAPPKEY" default=" "/>
     <preference name="OPPOAPPKEY" default=" "/>
     <preference name="OPPOSECRET" default=" "/>
-    <preference name="VIVOAPPKEY" default=" "/>
     <preference name="VIVOAPPID" default=" "/>
+    <preference name="VIVOAPPKEY" default=" "/>
+    <preference name="MEIZUAPPID" default=" "/>
+    <preference name="MEIZUAPPKEY" default=" "/>
 
     <engines>
         <engine name="cordova-android" version=">=5.0.0" />
@@ -61,12 +65,16 @@
                 </intent-filter>
             </service>
 
-            <meta-data android:name="com.vivo.push.api_key" android:value="$VIVOAPPKEY"/>
-            <meta-data android:name="com.vivo.push.app_id" android:value="$VIVOAPPID"/>
+            <meta-data android:name="NotificationChannelId" android:value="$CHANNELID"/>
+            <meta-data android:name="com.huawei.hms.client.appid" android:value="appid=$HMSAPPID"/>
+            <meta-data android:name="XIAOMI_APPID" android:value="$XIAOMIAPPID"/>
+            <meta-data android:name="XIAOMI_APPKEY" android:value="$XIAOMIAPPKEY"/>
             <meta-data android:name="OPPO_APPKEY" android:value="$OPPOAPPKEY"/>
             <meta-data android:name="OPPO_SECRET" android:value="$OPPOSECRET"/>
-            <meta-data android:name="com.huawei.hms.client.appid" android:value="appid=$HMSAPPID"/>
-            <meta-data android:name="NotificationChannelId" android:value="$CHANNELID"/>
+            <meta-data android:name="com.vivo.push.app_id" android:value="$VIVOAPPID"/>
+            <meta-data android:name="com.vivo.push.api_key" android:value="$VIVOAPPKEY"/>
+            <meta-data android:name="MEIZU_APPID" android:value="$MEIZUAPPID"/>
+            <meta-data android:name="MEIZU_APPKEY" android:value="$MEIZUAPPKEY"/>
         </config-file>
 
         <source-file src="src/android/res/xml/network_security_config.xml" target-dir="res/xml" />

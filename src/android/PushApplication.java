@@ -50,14 +50,14 @@ public class PushApplication extends Application {
     private void initPushService(final Context applicationContext) throws PackageManager.NameNotFoundException {
         ApplicationInfo appInfo = applicationContext.getPackageManager()
                 .getApplicationInfo(applicationContext.getPackageName(), PackageManager.GET_META_DATA);
+        final String XiaoMiAppId = appInfo.metaData.get("XIAOMI_APPID").toString();
+        final String XiaoMiAppKey = appInfo.metaData.get("XIAOMI_APPKEY").toString();
         final String OPPOAppKey = appInfo.metaData.get("OPPO_APPKEY").toString();
         final String OPPOAppSecret = appInfo.metaData.get("OPPO_SECRET").toString();
-        final String XiaoMiAppId = appInfo.metaData.get("XiaoMiAppId").toString();
-        final String XiaoMiAppKey = appInfo.metaData.get("XiaoMiAppKey").toString();
-        final String MeizuAppId = appInfo.metaData.get("MeizuAppId").toString();
-        final String MeizuAppKey = appInfo.metaData.get("MeizuAppKey").toString();
         final String VIVOAppId = appInfo.metaData.get("com.vivo.push.app_id").toString();
         final String VIVOAppKey = appInfo.metaData.get("com.vivo.push.api_key").toString();
+        final String MeizuAppId = appInfo.metaData.get("MEIZU_APPID").toString();
+        final String MeizuAppKey = appInfo.metaData.get("MEIZU_APPKEY").toString();
         final String NotificationChannelId = appInfo.metaData.get("NotificationChannelId").toString();
 
         // 创建NotificationChannel
