@@ -93,14 +93,6 @@
      * @return {void}           
      */
     listTags: function(successCallback, errorCallback) 
-
-    /**
-      * 没有权限时，请求开通通知权限，其他路过
-      * @param  string msg  请求权限的描述信息
-      * @param {} successCallback 
-      * @param {*} errorCallback 
-      */
-    requireNotifyPermission:function(msg,successCallback, errorCallback)
     
     /**
     * 阿里云推送消息透传回调

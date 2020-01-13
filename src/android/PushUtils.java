@@ -85,67 +85,67 @@ public class PushUtils {
     /**
      * 请求通知权限
      */
-    public void isShowNoticeDialog(Activity context, String msg) {
-        NotificationManagerCompat notification = NotificationManagerCompat.from(context);
-        boolean isEnabled = notification.areNotificationsEnabled();
-        if (msg == null) {
-            msg = "建议你开启通知权限，第一时间收到提醒";
-        }
-        // 未打开通知
-        if (!isEnabled) {
-            try {
-                showDialog(context, msg);
-            } catch (Exception ex) {
-            }
-        }
+    // public void isShowNoticeDialog(Activity context, String msg) {
+    //     NotificationManagerCompat notification = NotificationManagerCompat.from(context);
+    //     boolean isEnabled = notification.areNotificationsEnabled();
+    //     if (msg == null) {
+    //         msg = "建议你开启通知权限，第一时间收到提醒";
+    //     }
+    //     // 未打开通知
+    //     if (!isEnabled) {
+    //         try {
+    //             showDialog(context, msg);
+    //         } catch (Exception ex) {
+    //         }
+    //     }
 
-    }
+    // }
 
-    public void showDialog(Activity context, String msg) {
+    // public void showDialog(Activity context, String msg) {
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                AlertDialog alertDialog = new AlertDialog.Builder(context).setTitle("开启推送通知").setMessage(msg)
-                        .setNegativeButton("以后再说", new DialogInterface.OnClickListener() {
-                            @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // preference.edit().putBoolean("ShowNoticePermissions", false).apply();
-                            }
-                        }).setPositiveButton("去设置", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                                Intent intent = new Intent();
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                    intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
-                                    intent.putExtra("android.provider.extra.APP_PACKAGE", context.getPackageName());
-                                } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) { // 5.0
-                                    intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
-                                    intent.putExtra("app_package", context.getPackageName());
-                                    intent.putExtra("app_uid", context.getApplicationInfo().uid);
-                                    context.startActivity(intent);
-                                } else if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) { // 4.4
-                                    intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                    intent.addCategory(Intent.CATEGORY_DEFAULT);
-                                    intent.setData(Uri.parse("package:" + context.getPackageName()));
-                                } else if (Build.VERSION.SDK_INT >= 15) {
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    intent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
-                                    intent.setData(Uri.fromParts("package", context.getPackageName(), null));
-                                }
-                                context.startActivity(intent);
+    //     new Handler().postDelayed(new Runnable() {
+    //         @Override
+    //         public void run() {
+    //             AlertDialog alertDialog = new AlertDialog.Builder(context).setTitle("开启推送通知").setMessage(msg)
+    //                     .setNegativeButton("以后再说", new DialogInterface.OnClickListener() {
+    //                         @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
+    //                         @Override
+    //                         public void onClick(DialogInterface dialog, int which) {
+    //                             // preference.edit().putBoolean("ShowNoticePermissions", false).apply();
+    //                         }
+    //                     }).setPositiveButton("去设置", new DialogInterface.OnClickListener() {
+    //                         @Override
+    //                         public void onClick(DialogInterface dialog, int which) {
+    //                             dialog.cancel();
+    //                             Intent intent = new Intent();
+    //                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    //                                 intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
+    //                                 intent.putExtra("android.provider.extra.APP_PACKAGE", context.getPackageName());
+    //                             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) { // 5.0
+    //                                 intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
+    //                                 intent.putExtra("app_package", context.getPackageName());
+    //                                 intent.putExtra("app_uid", context.getApplicationInfo().uid);
+    //                                 context.startActivity(intent);
+    //                             } else if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) { // 4.4
+    //                                 intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+    //                                 intent.addCategory(Intent.CATEGORY_DEFAULT);
+    //                                 intent.setData(Uri.parse("package:" + context.getPackageName()));
+    //                             } else if (Build.VERSION.SDK_INT >= 15) {
+    //                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    //                                 intent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+    //                                 intent.setData(Uri.fromParts("package", context.getPackageName(), null));
+    //                             }
+    //                             context.startActivity(intent);
 
-                            }
-                        }).create();
-                if (context.isFinishing())
-                    return;
-                alertDialog.show();
-                alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
-                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
-            }
-        }, 5000);
+    //                         }
+    //                     }).create();
+    //             if (context.isFinishing())
+    //                 return;
+    //             alertDialog.show();
+    //             alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+    //             alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
+    //         }
+    //     }, 5000);
 
-    }
+    // }
 }

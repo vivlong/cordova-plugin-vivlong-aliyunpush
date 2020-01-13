@@ -47,7 +47,7 @@ public class AliyunPush extends CordovaPlugin {
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         Log.i(TAG, "AliyunPush # initialize");
         super.initialize(cordova, webView);
-        new PushUtils(cordova.getActivity()).isShowNoticeDialog(cordova.getActivity(), null);
+        // new PushUtils(cordova.getActivity()).isShowNoticeDialog(cordova.getActivity(), null);
     }
 
     /**
@@ -71,7 +71,7 @@ public class AliyunPush extends CordovaPlugin {
             final String msg = args.getString(0);
             this.cordova.getActivity().runOnUiThread(new Runnable() {
                 public void run() {
-                    new PushUtils(cordova.getActivity()).isShowNoticeDialog(cordova.getActivity(), msg);
+                    // new PushUtils(cordova.getActivity()).isShowNoticeDialog(cordova.getActivity(), msg);
                 }
             });
             ret = true;
