@@ -3,74 +3,40 @@
 ## Install
 
 > 注意：
-> - 应用的包名一定要和 APP_KEY 对应应用的包名一致，否则推送服务无法注册成功。
-> - 在使用 8 或以上版本的 Xcode 调试 iOS 项目时，需要先在项目配置界面的 Capabilities 中打开 Push Notifications 开关。
-> - 如没有注册小米，华为，OPPO等通道不配置即可
-> - 后台推送时可在ExtParameters参数中写入app跳转路径如ExtParameters:{url:'https://help.aliyun.com'},插件会把ExtParameters解析到push content中
-> - 后台推送时 AndroidOpenType设置为APPLICATION：打开应用 默认值
-> - 如项目中已存在 Application对象，安装完插件后请替换AndroidManifest.xml/application标签中属性android:name="com.alipush.PushApplication" 已有的Application类，然后在已有Application类onCreate() 钩子里初始化推送服务   
-```
-initPushService(this)  
-```
-
-- 通过 Cordova Plugins 安装，要求 Cordova CLI 5.0+：
-
-```
-修改项目级目录下build.gradle（{project}/build.gradle）：
-添加maven（低版本gradle，可能会有问题）
-```
-  maven {
-    url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
-  }
-```
-```
-  buildscript {
-    repositories {
-    +  maven {
-    +    url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
-    +  }
-  }
-
-  allprojects {
-    repositories {
-      +maven {
-      +  url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
-      +}
-    }
-  }
-```
-如cordova build时出错请打开AndroidManifest.xml手动维护，修正多余标签属性
-
-## Configuration
-
-This plugin has several configuration options that can be set in `config.xml`.
-
-### Android and iOS Preferences
-
-Preferences available for both iOS and Android
 
 ### Android Preferences
 
 - 对应Android系统推送，如果需要支持华为、小米、Google FCM（原GCM）系统通道，请在此页面配置对应的参数信息。可以根据需要配置一种或多种厂商辅助通道。
 - [阿里云推送官方文档](https://help.aliyun.com/document_detail/92837.html?spm=a2c4g.11174283.6.637.52eb6d16cxZ6zi)
 
-> - AliyunAppKey:阿里云appKey
-> - AliyunAppSecret:阿里云appSecret
-> - XiaoMiAppId:可不配置，小米通道AppId，如已注册，需在阿里云后台推送配置中配置
-> - XiaoMiAppKey:可不配置，小米通道AppKey，如已注册，需在阿里云后台推送配置中配置
-> - OPPOAppKey:可不配置，OPPO通道AppKey，如已注册，需在阿里云后台推送配置中配置
-> - OPPOAppSecret可不配置，OPPO通道AppSecret，如已注册，需在阿里云后台推送配置中配置
+> - CHANNELID:Android8.0以上通知的ID
+> - ALIAPPKEY:阿里云appKey
+> - ALIAPPSECRET:阿里云appSecret
+> - HMSAPPID:可不配置，华为通道AppId，如已注册，需在阿里云后台推送配置中配置
+> - XIAOMIAPPID:可不配置，小米通道AppId，如已注册，需在阿里云后台推送配置中配置
+> - XIAOMIAPPKEY:可不配置，小米通道AppKey，如已注册，需在阿里云后台推送配置中配置
+> - OPPOAPPKEY:可不配置，OPPO通道AppKey，如已注册，需在阿里云后台推送配置中配置
+> - OPPOSECRET:可不配置，OPPO通道AppSecret，如已注册，需在阿里云后台推送配置中配置
+> - VIVOAPPID:可不配置，VIVO通道AppId，如已注册，需在阿里云后台推送配置中配置
+> - VIVOAPPKEY:可不配置，VIVO通道AppKey，如已注册，需在阿里云后台推送配置中配置
+> - MEIZUAPPID:可不配置，MEIZU通道AppId，如已注册，需在阿里云后台推送配置中配置
+> - MEIZUAPPKEY:可不配置，MEIZU通道AppSecret，如已注册，需在阿里云后台推送配置中配置
 ```xml
 <config-file parent="/manifest/application" target="AndroidManifest.xml" xmlns:android="http://schemas.android.com/apk/res/android">
-    <meta-data android:name="AliyunAppKey" android:value="XXXXXXXXXX" />
-    <meta-data android:name="AliyunAppSecret" android:value="XXXXXXXXXX" />
-    <meta-data android:name="XiaoMiAppId" android:value="XXXXXXXXXX" />
-    <meta-data android:name="XiaoMiAppKey" android:value="XXXXXXXXXX" />
-    <meta-data android:name="OPPOAppKey" android:value="XXXXXXXXXX" />
-    <meta-data android:name="OPPOAppSecret" android:value="XXXXXXXXXX" />
+    <meta-data android:name="NotificationChannelId" android:value="$CHANNELID"/>
+    <meta-data android:name="com.alibaba.app.appkey" android:value="$ALIAPPKEY"/>
+    <meta-data android:name="com.alibaba.app.appsecret" android:value="$ALIAPPSECRET"/>
+    <meta-data android:name="com.huawei.hms.client.appid" android:value="appid=$HMSAPPID"/>
+    <meta-data android:name="XIAOMI_APPID" android:value="$XIAOMIAPPID"/>
+    <meta-data android:name="XIAOMI_APPKEY" android:value="$XIAOMIAPPKEY"/>
+    <meta-data android:name="OPPO_APPKEY" android:value="$OPPOAPPKEY"/>
+    <meta-data android:name="OPPO_SECRET" android:value="$OPPOSECRET"/>
+    <meta-data android:name="com.vivo.push.app_id" android:value="$VIVOAPPID"/>
+    <meta-data android:name="com.vivo.push.api_key" android:value="$VIVOAPPKEY"/>
+    <meta-data android:name="MEIZU_APPID" android:value="$MEIZUAPPID"/>
+    <meta-data android:name="MEIZU_APPKEY" android:value="$MEIZUAPPKEY"/>
 </config-file>
 ```
-
 
 ## Usage
 

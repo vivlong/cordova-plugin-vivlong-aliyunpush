@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-vivlong-aliyunpush" version="1.1.14"
+<plugin xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-vivlong-aliyunpush" version="1.1.15"
     xmlns="http://apache.org/cordova/ns/plugins/1.0">
 
     <name>Aliyun Push</name>
@@ -8,6 +8,8 @@
     <keywords>cordova,aliyun,push,aliyunpush,huawei,xiaomi,oppo,vivo,meizu</keywords>
 
     <preference name="CHANNELID" default="901209181657"/>
+    <preference name="ALIAPPKEY" default=" "/>
+    <preference name="ALIAPPSECRET" default=" "/>
     <preference name="HMSAPPID" default=" "/>
     <preference name="XIAOMIAPPID" default=" "/>
     <preference name="XIAOMIAPPKEY" default=" "/>
@@ -66,6 +68,8 @@
             </service>
 
             <meta-data android:name="NotificationChannelId" android:value="$CHANNELID"/>
+            <meta-data android:name="com.alibaba.app.appkey" android:value="$ALIAPPKEY"/>
+            <meta-data android:name="com.alibaba.app.appsecret" android:value="$ALIAPPSECRET"/>
             <meta-data android:name="com.huawei.hms.client.appid" android:value="appid=$HMSAPPID"/>
             <meta-data android:name="XIAOMI_APPID" android:value="$XIAOMIAPPID"/>
             <meta-data android:name="XIAOMI_APPKEY" android:value="$XIAOMIAPPKEY"/>

@@ -2,20 +2,22 @@ repositories {
     maven {
         url 'https://maven.aliyun.com/repository/releases'
     }
+    maven { url "http://maven.aliyun.com/nexus/content/repositories/releases" }
 }
 
 android {
     defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 26
         ndk { abiFilters 'armeabi' }
     }
-    // multiDexEnabled true
-    // dexOptions{
-    //     preDexLibraries = false
-    // }
-    // packagingOptions {
-    //     exclude 'META-INF/NOTICE'
-    //     exclude 'META-INF/LICENSE'
-    // }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
 }
 
 dependencies {
@@ -29,4 +31,10 @@ dependencies {
     api 'com.aliyun.ams:alicloud-android-man:1.2.4'
     api 'com.aliyun.ams:meizu-push:3.8.3-fix'
     // api 'com.growingio.android:vds-android-agent:track-2.8.9'
+    api('com.aliyun.ams:alicloud-android-ha-adapter:1.1.3.2-open@aar') {
+        transitive=true
+    }
+    api('com.aliyun.ams:alicloud-android-ha-crashreporter:1.2.1-open@aar') {
+        transitive=true
+    }
 }

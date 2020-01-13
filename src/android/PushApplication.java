@@ -23,6 +23,10 @@ import com.alibaba.sdk.android.push.register.VivoRegister;
 import com.alibaba.sdk.android.man.MANService;
 import com.alibaba.sdk.android.man.MANServiceProvider;
 
+import com.alibaba.ha.adapter.AliHaAdapter;
+import com.alibaba.ha.adapter.AliHaConfig;
+import com.alibaba.ha.adapter.Plugin;
+
 // import com.growingio.android.sdk.collection.Configuration;
 // import com.growingio.android.sdk.collection.GrowingIO;
 
@@ -35,8 +39,9 @@ public class PushApplication extends Application {
         super.onCreate();
         try {
             // initGrowingIO(this);
-            initPushService(this);
             initManService(this);
+            initHa(this);
+            initPushService(this);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -138,15 +143,40 @@ public class PushApplication extends Application {
     private void initManService(final Context applicationContext) throws PackageManager.NameNotFoundException {
         // 获取MAN服务
         MANService manService = MANServiceProvider.getService();
-        // 打开调试日志，线上版本建议关闭
         // manService.getMANAnalytics().turnOnDebug();
-        // 若需要关闭 SDK 的自动异常捕获功能可进行如下操作(如需关闭crash report，建议在init方法调用前关闭crash),详见文档5.4
         // manService.getMANAnalytics().turnOffCrashReporter();
-        // 设置渠道（用以标记该app的分发渠道名称），如果不关心可以不设置即不调用该接口，渠道设置将影响控制台【渠道分析】栏目的报表展现。如果文档3.3章节更能满足您渠道配置的需求，就不要调用此方法，按照3.3进行配置即可；1.1.6版本及之后的版本，请在init方法之前调用此方法设置channel.
-        // manService.getMANAnalytics().setChannel("某渠道");
-        // MAN初始化方法之一，从AndroidManifest.xml中获取appKey和appSecret初始化，若您采用上述
-        // 2.3中"统一接入的方式"，则使用当前init方法即可。
         manService.getMANAnalytics().init(this, getApplicationContext());
+    }
+
+    /**
+     * 初始化崩溃分析
+     *
+     * @param applicationContext
+     */
+    private void initHa(final Context applicationContext) throws PackageManager.NameNotFoundException {
+        Log.e(TAG, "initHa");
+        ApplicationInfo appInfo = applicationContext.getPackageManager()
+                .getApplicationInfo(applicationContext.getPackageName(), PackageManager.GET_META_DATA);
+        final String AliAppKey = appInfo.metaData.get("com.alibaba.app.appkey").toString();
+        final String AliAppSecret = appInfo.metaData.get("com.alibaba.app.appsecret").toString();
+        final String versionName = applicationContext.getPackageManager()
+                .getPackageInfo(applicationContext.getPackageName(), 0).versionName;
+        if (AliAppKey != null && AliAppKey.length() > 1 && AliAppSecret != null && AliAppSecret.length() > 1) {
+            AliHaConfig config = new AliHaConfig();
+            config.appKey = AliAppKey; // appkey
+            config.appSecret = AliAppSecret; // appsecret
+            config.appVersion = versionName;
+            config.channel = "mqc_all"; // 应用的渠道号标记，自定义
+            config.userNick = null;
+            config.application = this;
+            config.context = getApplicationContext();
+            config.isAliyunos = false; // 是否为yunos
+            AliHaAdapter.getInstance().addPlugin(Plugin.crashreporter); // 崩溃分析，如不需要可注释掉
+            // AliHaAdapter.getInstance().addPlugin(Plugin.apm); //性能监控，如不需要可注释掉
+            // AliHaAdapter.getInstance().addPlugin(Plugin.tlog); //移动日志，如不需要可注释掉
+            // AliHaAdapter.getInstance().openDebug(true); //调试日志开关
+            AliHaAdapter.getInstance().start(config); // 启动
+        }
     }
 
     /**
