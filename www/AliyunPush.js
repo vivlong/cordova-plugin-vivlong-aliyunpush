@@ -143,8 +143,20 @@ var AliyunPush = {
     this.callNative("checkPushChannelStatus", [], successCallback);
   },
 
+  clearNotifications: function(successCallback) {
+    this.callNative("clearNotifications", [], successCallback);
+  },
+
   areNotificationsEnabled: function(successCallback) {
     this.callNative("areNotificationsEnabled", [], successCallback);
+  },
+
+  manUserRegister: function(successCallback) {
+    this.callNative("manUserRegister", [], successCallback);
+  },
+
+  manUpdateUserAccount: function(successCallback) {
+    this.callNative("manUpdateUserAccount", [], successCallback);
   },
 
 };
