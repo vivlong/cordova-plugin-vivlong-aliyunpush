@@ -3,6 +3,8 @@
 ## Install
 
 > 注意：
+> - ionic cordova plugin add cordova-plugin-vivlong-aliyunpush --variable HMSAPPID=XXXXXX --variable OPPOAPPKEY=XXXXXX --variable OPPOSECRET=XXXXXX --variable VIVOAPPID=XXXXXX --variable VIVOAPPKEY=XXXXXX --variable ALIAPPKEY=XXXXXX --variable ALIAPPSECRET=XXXXXX
+> - 阿里云EMAS上下载aliyun-emas-services.json文件，复制到项目根目录\platforms\android\app\下即可，此目录是基于Cordova Android 7.0+才有
 
 ### Android Preferences
 
@@ -10,8 +12,8 @@
 - [阿里云推送官方文档](https://help.aliyun.com/document_detail/92837.html?spm=a2c4g.11174283.6.637.52eb6d16cxZ6zi)
 
 > - CHANNELID:Android8.0以上通知的ID
-> - ALIAPPKEY:阿里云appKey
-> - ALIAPPSECRET:阿里云appSecret
+> - ALIAPPKEY:可不配置，阿里云appKey，阿里云移动分析中奔溃分析业务所使用
+> - ALIAPPSECRET:可不配置，阿里云appSecret，阿里云移动分析中奔溃分析业务所使用
 > - HMSAPPID:可不配置，华为通道AppId，如已注册，需在阿里云后台推送配置中配置
 > - XIAOMIAPPID:可不配置，小米通道AppId，如已注册，需在阿里云后台推送配置中配置
 > - XIAOMIAPPKEY:可不配置，小米通道AppKey，如已注册，需在阿里云后台推送配置中配置
@@ -21,22 +23,6 @@
 > - VIVOAPPKEY:可不配置，VIVO通道AppKey，如已注册，需在阿里云后台推送配置中配置
 > - MEIZUAPPID:可不配置，MEIZU通道AppId，如已注册，需在阿里云后台推送配置中配置
 > - MEIZUAPPKEY:可不配置，MEIZU通道AppSecret，如已注册，需在阿里云后台推送配置中配置
-```xml
-<config-file parent="/manifest/application" target="AndroidManifest.xml" xmlns:android="http://schemas.android.com/apk/res/android">
-    <meta-data android:name="NotificationChannelId" android:value="$CHANNELID"/>
-    <meta-data android:name="com.alibaba.app.appkey" android:value="$ALIAPPKEY"/>
-    <meta-data android:name="com.alibaba.app.appsecret" android:value="$ALIAPPSECRET"/>
-    <meta-data android:name="com.huawei.hms.client.appid" android:value="appid=$HMSAPPID"/>
-    <meta-data android:name="XIAOMI_APPID" android:value="$XIAOMIAPPID"/>
-    <meta-data android:name="XIAOMI_APPKEY" android:value="$XIAOMIAPPKEY"/>
-    <meta-data android:name="OPPO_APPKEY" android:value="$OPPOAPPKEY"/>
-    <meta-data android:name="OPPO_SECRET" android:value="$OPPOSECRET"/>
-    <meta-data android:name="com.vivo.push.app_id" android:value="$VIVOAPPID"/>
-    <meta-data android:name="com.vivo.push.api_key" android:value="$VIVOAPPKEY"/>
-    <meta-data android:name="MEIZU_APPID" android:value="$MEIZUAPPID"/>
-    <meta-data android:name="MEIZU_APPKEY" android:value="$MEIZUAPPKEY"/>
-</config-file>
-```
 
 ## Usage
 
@@ -122,4 +108,25 @@
 
 ```
 
+### Ionic3
 
+```
+  declare var AliyunPush: any;
+
+  export class AliyunPushPlugin {
+
+    public static getDeviceId() {
+      return new Promise((resolve, reject) => {
+        AliyunPush.getDeviceId(
+          result => {
+            resolve(result);
+          },
+          error => {
+            reject(error);
+          }
+        );
+      });
+    }
+
+  }
+```
