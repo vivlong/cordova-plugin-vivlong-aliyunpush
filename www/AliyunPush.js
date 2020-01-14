@@ -151,12 +151,12 @@ var AliyunPush = {
     this.callNative("areNotificationsEnabled", [], successCallback);
   },
 
-  manUserRegister: function(successCallback) {
-    this.callNative("manUserRegister", [], successCallback);
+  manUserRegister: function(usernick, successCallback) {
+    this.callNative("manUserRegister", [usernick], successCallback);
   },
 
-  manUpdateUserAccount: function(successCallback) {
-    this.callNative("manUpdateUserAccount", [], successCallback);
+  manUpdateUserAccount: function(usernick, userid, successCallback) {
+    this.callNative("manUpdateUserAccount", [usernick, userid], successCallback);
   },
 
 };

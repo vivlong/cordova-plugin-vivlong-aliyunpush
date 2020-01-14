@@ -110,6 +110,8 @@
 
 ### Ionic3
 
+demo
+
 ```
   declare var AliyunPush: any;
 
